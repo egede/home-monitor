@@ -62,10 +62,16 @@ class FroniusTestCase(unittest.TestCase):
             fronius.inverter('http://nowhere')
 
     @mock.patch('requests.get', side_effect=mocked_requests_get)
-    def test_power(self, mock_get):
+    def test_power_getter(self, mock_get):
         i = fronius.inverter('http://good_domain')
-        print(i.power())
-        assert(i.power() == 1234)
+        assert(i.power == 1234)
+
+    @mock.patch('requests.get', side_effect=mocked_requests_get)
+    def test_power_setter(self, mock_get):
+        i = fronius.inverter('http://good_domain')
+        with self.assertRaises(AttributeError):
+            i.power = 1000
+
 
 if __name__ == '__main__':
     unittest.main()

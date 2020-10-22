@@ -1,7 +1,8 @@
 import requests
+from framework.widget import widget
 
 
-class inverter():
+class inverter(widget):
     """Communicate with the Fronius inverter RESTful API and create plots."""
 
     def __init__(self, server='http://froniusinverter'):
@@ -21,6 +22,10 @@ class inverter():
         r.raise_for_status()
         return r.json()
 
+    @property
     def power(self):
         reply = self._get('GetInverterRealtimeData.cgi', {'Scope': 'System'})
         return reply['Body']['Data']['PAC']['Values']['1']
+
+    def display(self, server):
+        print(f'The current power is {self.power} W')
