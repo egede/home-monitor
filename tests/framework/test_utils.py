@@ -29,8 +29,7 @@ class WorkerTestCase(unittest.TestCase):
         async def main():
             await asyncio.wait_for(workers(), timeout=1.0)
 
-        with self.assertRaises(asyncio.TimeoutError):
-            asyncio.run(main())
+        asyncio.run(main())
 
     @mock.patch('framework.utils.matplotlib')
     def test_move_tkagg(self, mock_mpl):
