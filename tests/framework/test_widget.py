@@ -11,16 +11,16 @@ class WidgetTestCase(unittest.TestCase):
             widget('8x4', 2)
 
     def test_text_instantiate(self):
-        text('abc', '8x4', 2)
+        text('8x4', 2, 'abc')
 
     def test_text_getters(self):
-        t = text('abc', '8x4', 2)
+        t = text('8x4', 2, 'abc')
         assert(t.text == 'abc')
         assert(t.geometry == '8x4')
         assert(t.updateinterval == 2)
 
     def test_text_setters(self):
-        t = text('abc', '8x4', 2)
+        t = text('8x4', 2, 'abc')
         t.text = 'ABC'
         assert(t.text == 'ABC')
         t.geometry = '80x40'
@@ -29,7 +29,7 @@ class WidgetTestCase(unittest.TestCase):
         assert(t.updateinterval == 3)
 
     def test_text_display(self):
-        t = text('abc', '8x4', 2)
+        t = text('8x4', 2, 'abc')
         t.display('X')
 
 
