@@ -28,10 +28,10 @@ async def worker(widget):
 
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
 
-    import matplotlib.pyplot as plt
+#     import matplotlib.pyplot as plt
 
-    f, ax = plt.subplots()
-    move_figure(f, 500, 300)
-    plt.show()
+#     f, ax = plt.subplots()
+#     move_figure(f, 500, 300)
+#     plt.show()
