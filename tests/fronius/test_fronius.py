@@ -45,30 +45,30 @@ class FroniusTestCase(unittest.TestCase):
 
     @mock.patch('requests.get', side_effect=mocked_requests_get)
     def test_inverter(self, mock_get):
-        fronius.inverter('http://good_domain')
+        fronius.inverter('10x20', 1, 'http://good_domain')
 
     @mock.patch('requests.get', side_effect=mocked_requests_get)
     def test_wrong_api(self, mock_get):
         try:
-            fronius.inverter('http://version2')
+            fronius.inverter('10x20', 1, 'http://version2')
         except ConnectionError as err:
             print(err)
         with self.assertRaises(ConnectionError):
-            fronius.inverter('http://version2')
+            fronius.inverter('10x20', 1, 'http://version2')
 
     @mock.patch('requests.get', side_effect=mocked_requests_get)
     def test_wrong_server(self, mock_get):
         with self.assertRaises(ConnectionError):
-            fronius.inverter('http://nowhere')
+            fronius.inverter('10x20', 1, 'http://nowhere')
 
     @mock.patch('requests.get', side_effect=mocked_requests_get)
     def test_power_getter(self, mock_get):
-        i = fronius.inverter('http://good_domain')
+        i = fronius.inverter('10x20', 1, 'http://good_domain')
         assert(i.power == 1234)
 
     @mock.patch('requests.get', side_effect=mocked_requests_get)
     def test_power_setter(self, mock_get):
-        i = fronius.inverter('http://good_domain')
+        i = fronius.inverter('10x20', 1, 'http://good_domain')
         with self.assertRaises(AttributeError):
             i.power = 1000
 
