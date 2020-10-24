@@ -5,7 +5,8 @@ from framework.widget import widget
 class inverter(widget):
     """Communicate with the Fronius inverter RESTful API and create plots."""
 
-    def __init__(self, server='http://froniusinverter'):
+    def __init__(self, geometry, updateinterval, server='http://froniusinverter'):
+        super().__init__(geometry, updateinterval)
         reply = self._version(server)
         if reply['APIVersion'] != 1:
             print('No support for Fronius API version different from 1')

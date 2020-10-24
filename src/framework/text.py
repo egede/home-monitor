@@ -4,7 +4,7 @@ from framework.widget import widget
 class text(widget):
     """Display a simple text message on the screen"""
 
-    def __init__(self, text, geometry, updateinterval):
+    def __init__(self, geometry, updateinterval, text):
         super().__init__(geometry, updateinterval)
         self.text = text
 
