@@ -16,8 +16,8 @@ class WorkerTestCase(unittest.TestCase):
             def __init__(self):
                 self.updateinterval = 1
 
-            def display(self, arg):
-                time.sleep(1)
+            def update(self, arg):
+                time.sleep(1.0)
 
         async def workers():
             await asyncio.gather(
