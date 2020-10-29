@@ -1,22 +1,36 @@
 import asyncio
 
+from guizero import App
+from threading import Thread
+
 from framework.utils import worker
 from framework.text import text
-from fronius.inverter import inverter
+# from fronius.inverter import inverter
 
 
-async def workers():
-    await asyncio.gather(
-        worker(text('10x10', 5, 'abc')),
-        worker(inverter('20x20', 30)),
-    )
+def start_background_loop(loop: asyncio.AbstractEventLoop) -> None:
+    asyncio.set_event_loop(loop)
+    loop.run_forever()
 
 
-async def main():
-    try:
-        await asyncio.wait_for(workers(), timeout=120.0)
-    except asyncio.TimeoutError:
-        print('timeout!')
+async def workers(*widgets):
+    await asyncio.gather(*widgets)
 
 
-asyncio.run(main())
+def main():
+
+    loop = asyncio.new_event_loop()
+    t = Thread(target=start_background_loop, args=(loop,), daemon=True)
+    t.start()
+
+    app = App(title="Home monitor")
+    message = worker(text(app, '10x10', 5, 'abc'))
+
+    task = asyncio.run_coroutine_threadsafe(workers(message), loop)
+
+    app.display()
+
+    task.cancel()
+
+
+main()

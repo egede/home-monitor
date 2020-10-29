@@ -1,12 +1,14 @@
 from framework.widget import widget
+from guizero import Text
 
 
 class text(widget):
     """Display a simple text message on the screen"""
 
-    def __init__(self, geometry, updateinterval, text):
+    def __init__(self, app, geometry, updateinterval, text):
         super().__init__(geometry, updateinterval)
         self.text = text
+        self._message = Text(app, text=self.text)
 
     @property
     def text(self):
@@ -17,5 +19,5 @@ class text(widget):
         print('Setting text')
         self._text = text
 
-    def display(self, server):
-        print(f'{self.text} at geometry {self.geometry} and upadate every {self.updateinterval} seconds.')
+    def update(self):
+        self._message.text = self.text

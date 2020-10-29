@@ -25,5 +25,5 @@ class widget(ABC):
         self._updateinterval = updateinterval
 
     @abstractmethod
-    def display(self, server):
+    def update(self):
         pass
