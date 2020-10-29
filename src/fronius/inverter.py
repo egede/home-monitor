@@ -73,7 +73,7 @@ class inverter(widget):
 
         return times, power
 
-    def display(self, server):
+    def update(self):
         times, power = self.power_history()
 
         fig, ax = plt.subplots()
